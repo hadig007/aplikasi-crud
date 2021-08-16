@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\PageContoller;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/login',[PageContoller::class,'login'])->name('login');
+Route::get('/postlogin',[PageContoller::class,'postlogin'])->name('postlogin');
+Route::get('/logout',[PageContoller::class,'logout'])->name('logout');
+
+Route::group(['middleware' => ['auth']],function(){
+    Route::get('/home',[PageContoller::class,'home'])->name('home');
 });
